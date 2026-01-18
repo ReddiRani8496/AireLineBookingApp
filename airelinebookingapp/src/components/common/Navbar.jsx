@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ApiService from "../../services/ApiService";
 import "./Navbar.css";
@@ -8,6 +8,11 @@ function Navbar() {
   const isAdmin = ApiService.isAdmin();
   const isPilot = ApiService.isPilot();
   const isCustomer = ApiService.isCustomer();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <div className="navbar">
@@ -18,7 +23,10 @@ function Navbar() {
             <span className="logo-text">Airlines</span>
           </Link>
         </div>
-        <div className="navbar-links">
+        <button className="navbar-toggle" onClick={toggleMenu}>
+          {isMenuOpen ? "X" : "☰"}
+        </button>
+        <div className={`navbar-links ${isMenuOpen ? "active" : "hidden"}`}>
           <Link to="/" className="nav-link">
             Home
           </Link>

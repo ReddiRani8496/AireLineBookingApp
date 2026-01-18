@@ -77,13 +77,36 @@
   border-color: #ffb300;
 }
 
-@media only screen and (max-design: 768px) {
+.navbar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.navbar-toggle.active {
+  color: #ffab00;
+}
+
+@media only screen and (max-width: 768px) {
   .navbar {
     padding: 1rem;
   }
   .navbar-container {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .navbar-brand {
+    order: 1;
+    flex: 1;
+  }
+
+  .navbar-toggle {
+    display: block;
+    order: 2;
   }
 
   .navbar-links {
@@ -91,7 +114,16 @@
     flex-direction: column;
     gap: 0.5rem;
     margin-top: 1rem;
+    display: flex;
+    order: 3;
+  }
+
+  .navbar-links.hidden {
     display: none;
+  }
+
+  .navbar-links.active {
+    display: flex;
   }
 
   .nav-link .nav-button {
