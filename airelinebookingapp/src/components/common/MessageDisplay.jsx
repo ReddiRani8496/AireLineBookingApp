@@ -17,7 +17,14 @@ function MessageDisplay({ message, type = "error", onDismiss }) {
   const messageClass = isError ? "error-message" : "success-message";
   const progressClass = isError ? "error-progress" : "success-progress";
 
-  return <div>MessageDisplay</div>;
+  return (
+    <div className={`message-display ${displayClass}`}>
+      <div className="message-content">
+        <span className={`message-text ${messageClass}`}>{message}</span>
+        <div className={`message-progress ${progressClass}`}></div>
+      </div>
+    </div>
+  );
 }
 
 // hooks, custom hook
@@ -53,7 +60,7 @@ export const useMessage = () => {
     },
 
     // component to render successmessage
-    successDisplay: () => {
+    SuccessDisplay: () => {
       <MessageDisplay
         message={successMessage}
         type="success"
