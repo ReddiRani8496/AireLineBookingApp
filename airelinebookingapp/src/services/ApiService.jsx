@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 class ApiService {
   static BASE_URL = "http://localhost:8080/api";
@@ -65,7 +66,10 @@ class ApiService {
   // REGISTER AND LOGIN USER
 
   static async registerUser(body) {
-    const response = await axios.post(`${BASE_URL}/auth/register`, body);
+    console.log("inside register user ", body);
+    console.log("url", `${this.BASE_URL}/auth/register`);
+    const response = await axios.post(`${this.BASE_URL}/auth/register`, body);
+    console.log("line 71");
     return response.data;
   }
 
@@ -90,7 +94,7 @@ class ApiService {
       body,
       {
         headers: this.getHeader(),
-      }
+      },
     );
     return response.data;
   }
