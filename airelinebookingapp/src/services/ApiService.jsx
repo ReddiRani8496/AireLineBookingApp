@@ -74,7 +74,7 @@ class ApiService {
   }
 
   static async loginUser(body) {
-    const response = await axios.post(`${BASE_URL}/auth/login`, body);
+    const response = await axios.post(`${this.BASE_URL}/auth/login`, body);
     return response.data;
   }
 
