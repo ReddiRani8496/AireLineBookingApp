@@ -25,28 +25,20 @@ function Login() {
       return;
     }
 
-    if (formData.password != formData.confirmPassword) {
-      showError("Password do not match");
-    }
-
     const loginData = {
       email: formData.email,
       password: formData.password,
     };
     try {
-      console.log("inside try");
       const response = await ApiService.loginUser(loginData);
       console.log("response ", response);
       if (response.statusCode == 200) {
-        ApiService.saveRoles(response?.data?.roles);
-        ApiService.saveToken(response?.data?.token);
         navigate("/");
-        showSuccess("Logged In successfully");
+        showSuccess("Login successfull");
       } else {
         showError("Login is not successfull");
       }
     } catch (error) {
-      console.log("inside catch", error);
       showError("Login is not successfull");
     }
   };
@@ -84,17 +76,17 @@ function Login() {
               value={formData.password}
               onChange={handleChange}
               required
-              placeholder="Enter your password"
+              placeholder="Create a password"
             />
           </div>
 
           <button type="submit" className="auth-button">
-            Login
+            Sign In
           </button>
 
           <div className="auth-footer">
             <p>
-              Don't have an account? <Link to="/register">Register here</Link>
+              Don't have an account? <Link to="/login">Register here</Link>
             </p>
           </div>
         </form>

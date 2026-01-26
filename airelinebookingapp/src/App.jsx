@@ -6,6 +6,7 @@ import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
 import Registration from "./components/auth/Registration";
 import Login from "./components/auth/Login";
+import HomePage from "./components/pages/HomePage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/register" element={<Registration />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/" element={<HomePage />} />
       </Routes>
       <Footer />
     </BrowserRouter>
