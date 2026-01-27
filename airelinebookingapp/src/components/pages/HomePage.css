@@ -1,0 +1,99 @@
+.home-page {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero-section {
+  background-image: url("https://images.unsplash.com/photo-1556388158-158ea5ccacbd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #ffab00;
+  }
+
+  p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+  }
+}
+.search-box {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  z-index: 1;
+  position: relative;
+}
+
+.search-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 0;
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #555;
+  }
+
+  input,
+  select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+
+  input:focus,
+  select:focus {
+    outline: none;
+    border-color: #1a237e;
+  }
+}
+
+.search-button {
+  background-color: #1a237e;
+  color: white;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.search-button:hover {
+  background-color: #303f9f;
+}
+.swap-cities {
+  button {
+    border-radius: 50%;
+    background-color: #1a237e;
+    padding: 0.5rem;
+    color: white;
+    border: none;
+    margin-top: 25px;
+    i {
+      font-size: 20px;
+    }
+  }
+}

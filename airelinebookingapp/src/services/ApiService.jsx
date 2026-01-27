@@ -58,7 +58,7 @@ class ApiService {
   static getHeader() {
     const token = this.getToken();
     return {
-      Authorization: `Beader ${token}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
   }
@@ -149,7 +149,7 @@ class ApiService {
   }
 
   static async getAllAirports() {
-    const response = await axios.get(`${BASE_URL}/airport/allAriports`, {
+    const response = await axios.get(`${this.BASE_URL}/airport/allAirports`, {
       headers: this.getHeader(),
     });
     return response.data;
