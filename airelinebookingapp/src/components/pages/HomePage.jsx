@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useMessage } from "../common/MessageDisplay";
 import ApiService from "../../services/ApiService";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./HomePage.css";
 
 function HomePage() {
@@ -177,6 +177,41 @@ function HomePage() {
             </div>
           </form>
           <button className="search-button">Search Flights</button>
+        </div>
+      </div>
+
+      {/**Popular destinations */}
+      <div className="popular-destinations">
+        <h2 className="popular-destination-title">Popular Destinations</h2>
+        <p className="popular-destination-para">
+          Explore our most booked flight routes
+        </p>
+
+        <div className="destination-card-container">
+          {popularDestinations.map((destination) => (
+            <div key={destination.id} className="destination-card">
+              <div
+                className="destination-card-image"
+                style={{
+                  backgroundImage: `url(/images/${destination.image})`,
+                }}
+              >
+                <div className="destination-card-city">
+                  <h3>{destination.city}</h3>
+                  <p>{destination.country}</p>
+                </div>
+              </div>
+
+              <div className="destination-card-price-container">
+                <span className="destination-card-price">
+                  From {destination.price}
+                </span>
+                <Link to="/flights" className="book-button">
+                  Book Now
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
