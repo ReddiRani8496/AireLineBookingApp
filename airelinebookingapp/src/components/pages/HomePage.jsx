@@ -214,6 +214,60 @@ function HomePage() {
           ))}
         </div>
       </div>
+
+      {/**Why to choose our airlines */}
+      <div className="features-container">
+        <h2 className="features-heading">Why Choose Rani Airlines</h2>
+        <div className="features-card-container">
+          <div className="feature-card">
+            <div className="feature-icon">✈️</div>
+            <h3>Modern Fleet</h3>
+            <p>
+              Fly in comfort with our state-of-the-art aircraft featuring the
+              latest amenities.
+            </p>
+          </div>
+
+          <div className="feature-card">
+            <div className="feature-icon">⏰</div>
+            <h3>On-Time Performance</h3>
+            <p>
+              We pride ourselves on our industry leading punctuality record.
+            </p>
+          </div>
+
+          <div className="feature-card">
+            <div className="feature-icon">🍽️</div>
+            <h3>Gournment Dining</h3>
+            <p>Enjoy chef-curated meals inspired by global cuisines.</p>
+          </div>
+
+          <div className="feature-card">
+            <div className="feature-icon">🏨</div>
+            <h3>Extra Legroom</h3>
+            <p>
+              More space to relax with our generous seat pitch in all classes.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/**special offers */}
+      <div className="offers-container">
+        <h2 className="offer-section-heading">Special Offers</h2>
+        <p className="offer-section-description">
+          Don't miss these exclusive deals
+        </p>
+        <div className="offer-card">
+          <div className="offer-content">
+            <h3>Summer Sale - Up to 30% off!</h3>
+            <p>Book by June 30 for travel between July and September.</p>
+            <Link to="/flights" className="offer-button">
+              View Deals
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
