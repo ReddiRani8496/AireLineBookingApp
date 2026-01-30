@@ -7,7 +7,6 @@ import "./HomePage.css";
 function HomePage() {
   const { ErrorDisplay, SuccessDisplay, showError, showSuccess } = useMessage();
   const [airports, setAirports] = useState([]);
-  const [loadingAirports, setLoadingAirports] = useState(true);
   const [searchData, setSearchData] = useState({
     departureIataCode: "",
     arrivalIataCode: "",
@@ -48,7 +47,6 @@ function HomePage() {
   ];
 
   useEffect(() => {
-    console.log("inside use effect");
     const fetchAllAirports = async () => {
       try {
         console.log("inside try block");
@@ -56,8 +54,6 @@ function HomePage() {
         setAirports(response.data || []);
       } catch (error) {
         showError("Failed to fetch airports");
-      } finally {
-        setLoadingAirports(false);
       }
     };
 
@@ -75,7 +71,7 @@ function HomePage() {
       );
       return;
     }
-
+    console.log(searchData.departureIataCode);
     navigate(
       `/flights?departureIataCode=${searchData.departureIataCode}&arrivalIataCode=${searchData.arrivalIataCode}&departureDate=${searchData.departureDate}`,
     );
@@ -136,11 +132,11 @@ function HomePage() {
               <div className="form-group">
                 <label>To</label>
                 <select
-                  value={searchData.departureIataCode}
+                  value={searchData.arrivalIataCode}
                   onChange={(e) =>
                     setSearchData({
                       ...searchData,
-                      departureIataCode: e.target.value,
+                      arrivalIataCode: e.target.value,
                     })
                   }
                 >
@@ -175,8 +171,9 @@ function HomePage() {
                 />
               </div>
             </div>
+
+            <button className="search-button">Search Flights</button>
           </form>
-          <button className="search-button">Search Flights</button>
         </div>
       </div>
 
