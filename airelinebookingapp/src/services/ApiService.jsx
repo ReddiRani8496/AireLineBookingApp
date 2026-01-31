@@ -81,9 +81,14 @@ class ApiService {
   // user details
 
   static async getMyAccountDetails() {
-    const response = await axios.get(`${BASE_URL}/users/myAccountDetails`, {
-      headers: getHeader(),
-    });
+    console.log("line 844444444", `${this.BASE_URL}/users/myAccountDetails`);
+    console.log(this.getHeader());
+    const response = await axios.get(
+      `${this.BASE_URL}/users/myAccountDetails`,
+      {
+        headers: this.getHeader(),
+      },
+    );
 
     return response.data;
   }
@@ -157,6 +162,35 @@ class ApiService {
 
   static async getAirportById(id) {
     const response = await axios.get(`${BASE_URL}/airport/findById/${id}`, {
+      headers: this.getHeader(),
+    });
+
+    return response.data;
+  }
+
+  static async searchFlights(
+    departureIataCode,
+    arrivalIataCode,
+    departureDate,
+  ) {
+    const params = {
+      departureIataCode: departureIataCode,
+      arrivalIataCode: arrivalIataCode,
+      status: "SCHEDULED",
+      departureDate: departureDate,
+    };
+
+    const response = await axios.get(`${this.BASE_URL}/flights/searchFlight`, {
+      params: params,
+      headers: this.getHeader(),
+    });
+
+    return response.data;
+  }
+
+  // booking apis
+  static async getMyBookings() {
+    const response = await axios.get(`${this.BASE_URL}/booking/myBookings`, {
       headers: this.getHeader(),
     });
 

@@ -8,6 +8,7 @@ import Registration from "./components/auth/Registration";
 import Login from "./components/auth/Login";
 import HomePage from "./components/pages/HomePage";
 import FindFlight from "./components/pages/FindFlight";
+import ProfilePage from "./components/profile/ProfilePage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/flights" element={<FindFlight />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

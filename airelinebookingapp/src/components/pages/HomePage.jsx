@@ -61,6 +61,7 @@ function HomePage() {
   }, []);
 
   const handleSearch = async (e) => {
+    e.preventDefault();
     if (
       !searchData.departureIataCode ||
       !searchData.arrivalIataCode ||
@@ -72,6 +73,7 @@ function HomePage() {
       return;
     }
     console.log(searchData.departureIataCode);
+    console.log("inside home", searchData);
     navigate(
       `/flights?departureIataCode=${searchData.departureIataCode}&arrivalIataCode=${searchData.arrivalIataCode}&departureDate=${searchData.departureDate}`,
     );

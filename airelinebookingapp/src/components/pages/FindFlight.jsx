@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useMessage } from "../common/MessageDisplay";
 import "./FindFlight.css";
 import ApiService from "../../services/ApiService";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function FindFlight() {
   const { ErrorDisplay, SuccessDisplay, showError, showSuccess } = useMessage();
@@ -13,6 +13,9 @@ function FindFlight() {
     arrivalIataCode: "",
     departureDate: "",
   });
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAllAirports = async () => {
@@ -28,7 +31,47 @@ function FindFlight() {
     fetchAllAirports();
   }, []);
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    console.log("params", params);
+    console.log("departureIataCode", params.get("departureIataCode"));
+    console.log("arrivalIataCode", params.get("arrivalIataCode"));
+    console.log("departureDate", params.get("departureDate"));
+    const initialParams = {
+      departureIataCode: params.get("departureIataCode") || "",
+      arrivalIataCode: params.get("arrivalIataCode") || "",
+      departureDate: params.get("departureDate") || "",
+    };
+
+    setSearchData(initialParams);
+    if (
+      initialParams.departureIataCode ||
+      initialParams.arrivalIataCode ||
+      initialParams.departureDate
+    ) {
+      console.log("initialParams useEffect", initialParams);
+      fetchFlights(initialParams);
+    }
+  }, [location]);
+
+  const fetchFlights = async (initialParams) => {
+    console.log("initialParams", initialParams);
+    try {
+      const response = await ApiService.searchFlights(
+        initialParams.departureIataCode,
+        initialParams.arrivalIataCode,
+        initialParams.departureDate,
+      );
+      setFlights(response.data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   const handleSearch = async (e) => {
+    console.log("searchData", searchData);
+    e.preventDefault(); // Prevent form submission
+
     if (
       !searchData.departureIataCode ||
       !searchData.arrivalIataCode ||
@@ -39,17 +82,21 @@ function FindFlight() {
       );
       return;
     }
-    console.log(searchData.departureIataCode);
-    // navigate(
-    //   `/flights?departureIataCode=${searchData.departureIataCode}&arrivalIataCode=${searchData.arrivalIataCode}&departureDate=${searchData.departureDate}`,
-    // );
+
+    // Build URL params and navigate
+    const query = new URLSearchParams();
+    query.append("departureIataCode", searchData.departureIataCode);
+    query.append("arrivalIataCode", searchData.arrivalIataCode);
+    query.append("departureDate", searchData.departureDate);
+
+    navigate(`?${query.toString()}`);
   };
 
   const handleSwapAirports = () => {
-    searchData({
+    setSearchData({
       ...searchData,
-      departureIataCode: arrivalIatacode,
-      arrivalIataCode: departureIataCode,
+      departureIataCode: searchData.arrivalIataCode,
+      arrivalIataCode: searchData.departureIataCode,
     });
   };
 
@@ -150,10 +197,10 @@ function FindFlight() {
               </div>
               <div className="form-group">
                 <label>Departure Date</label>
-                {console.log(new Date().toISOString())}
                 <input
                   type="date"
                   required
+                  value={searchData.departureDate}
                   onChange={(e) =>
                     setSearchData({
                       ...searchData,
@@ -170,9 +217,10 @@ function FindFlight() {
         </div>
 
         <div className="results-container">
+          {console.log("flights", flights)}
           {flights.length > 0 ? (
             <div className="flights-list">
-              {flights.map((flight) => {
+              {flights.map((flight) => (
                 <div className="flight-card">
                   <div className="flight-card-header">
                     <div className="flight-number"> {flight.flightNumber}</div>
@@ -228,8 +276,8 @@ function FindFlight() {
                       Book Now
                     </Link>
                   </div>
-                </div>;
-              })}
+                </div>
+              ))}
             </div>
           ) : (
             <div className="no-flights">
