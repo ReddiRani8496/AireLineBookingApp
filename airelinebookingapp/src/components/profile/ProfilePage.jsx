@@ -118,7 +118,66 @@ function ProfilePage() {
               </div>
             </div>
           ) : (
-            <div></div>
+            <div className="bookings-list">
+              {bookings.length > 0 ? (
+                bookings.map((booking) => (
+                  <div key={booking.id} className="booking-card">
+                    <div className="booking-header">
+                      <div className="booking-ref">
+                        Booking #{booking.bookingReference}
+                      </div>
+                      <div className="booking-status">{booking.status}</div>
+                    </div>
+
+                    <div className="booking-details">
+                      <div className="flight-info">
+                        <div className="flight-number">
+                          {booking.flight.flightNumber}
+                        </div>
+                        <div className="route">
+                          {console.log(booking.flight)}
+                          {booking.flight.departureAirport.iataCode} -{" "}
+                          {booking.flight.arrivalAirport.iataCode}
+                        </div>
+                        <div className="date">
+                          {booking.flight.departureTime}
+                        </div>
+                      </div>
+
+                      <div className="passengers-info">
+                        <div className="passengers-count">
+                          {booking.passengers.length} Passenger
+                          {booking.passengers.length > 1 ? "s" : ""}
+                        </div>
+                        <div className="passengers-list">
+                          {booking.passengers.map((p, i) => (
+                            <span key={i}>
+                              {p.firstName} {p.lastName}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="booking-actions">
+                        <Link
+                          className="view-details"
+                          to={`booking/${booking.id}`}
+                        >
+                          View Details
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="no-bookings">
+                  <p>You dont' have any bookings yet</p>
+                  <Link to="/flights" className="book-flight">
+                    Book a Flight
+                  </Link>
+                </div>
+              )}
+            </div>
           )}
         </div>
       </div>
