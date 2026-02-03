@@ -9,6 +9,7 @@ import Login from "./components/auth/Login";
 import HomePage from "./components/pages/HomePage";
 import FindFlight from "./components/pages/FindFlight";
 import ProfilePage from "./components/profile/ProfilePage";
+import UpdateProfilePage from "./components/profile/UpdateProfilePage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/flights" element={<FindFlight />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/update/profile" element={<UpdateProfilePage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

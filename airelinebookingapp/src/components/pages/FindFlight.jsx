@@ -141,7 +141,7 @@ function FindFlight() {
           <h2>Find Your Flight</h2>
           <form onSubmit={handleSearch}>
             <div className="search-fields">
-              <div className="form-group">
+              <div className="flight-form-group">
                 <label>From</label>
                 <select
                   value={searchData.departureIataCode}
@@ -169,7 +169,7 @@ function FindFlight() {
                 </button>
               </div>
 
-              <div className="form-group">
+              <div className="flight-form-group">
                 <label>To</label>
                 <select
                   value={searchData.arrivalIataCode}
@@ -195,7 +195,7 @@ function FindFlight() {
                     })}
                 </select>
               </div>
-              <div className="form-group">
+              <div className="flight-form-group">
                 <label>Departure Date</label>
                 <input
                   type="date"

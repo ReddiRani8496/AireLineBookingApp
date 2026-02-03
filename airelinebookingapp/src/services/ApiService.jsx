@@ -94,8 +94,9 @@ class ApiService {
   }
 
   static async updateMyAccount(body) {
+    console.log("inside update my acccount api");
     const response = await axios.put(
-      `${BASE_URL}/users/updateMyAccount`,
+      `${this.BASE_URL}/users/updateMyAccount`,
       body,
       {
         headers: this.getHeader(),

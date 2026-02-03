@@ -1,0 +1,31 @@
+.update-profile-submit {
+  padding: 0.8rem;
+  background-color: #1a237e;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+
+.update-profile-cancel {
+  padding: 0.8rem;
+  background-color: lightgray;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  text-decoration: none;
+  text-align: center;
+  color: black;
+}
+
+.update-profile-actions {
+  display: flex;
+  gap: 1rem;
+}

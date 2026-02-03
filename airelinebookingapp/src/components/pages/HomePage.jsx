@@ -103,7 +103,7 @@ function HomePage() {
           <SuccessDisplay />
           <form onSubmit={handleSearch}>
             <div className="search-fields">
-              <div className="form-group">
+              <div className="search-form-group">
                 <label>From</label>
                 <select
                   value={searchData.departureIataCode}
@@ -131,7 +131,7 @@ function HomePage() {
                 </button>
               </div>
 
-              <div className="form-group">
+              <div className="search-form-group">
                 <label>To</label>
                 <select
                   value={searchData.arrivalIataCode}
@@ -157,7 +157,7 @@ function HomePage() {
                     })}
                 </select>
               </div>
-              <div className="form-group">
+              <div className="search-form-group">
                 <label>Departure Date</label>
                 {console.log(new Date().toISOString())}
                 <input
