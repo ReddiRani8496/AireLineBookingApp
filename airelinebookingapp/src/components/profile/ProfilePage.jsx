@@ -140,7 +140,7 @@ function ProfilePage() {
                           {booking.flight.arrivalAirport.iataCode}
                         </div>
                         <div className="date">
-                          {booking.flight.departureTime}
+                          {formatDate(booking.flight.departureTime)}
                         </div>
                       </div>
 

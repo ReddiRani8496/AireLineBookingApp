@@ -197,6 +197,13 @@ class ApiService {
 
     return response.data;
   }
+
+  static async getBookingById(id) {
+    const response = await axios.get(`${this.BASE_URL}/booking/getById/${id}`, {
+      headers: this.getHeader(),
+    });
+    return response.data;
+  }
 }
 
 export default ApiService;
