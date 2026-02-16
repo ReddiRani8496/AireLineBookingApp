@@ -10,6 +10,7 @@ import HomePage from "./components/pages/HomePage";
 import FindFlight from "./components/pages/FindFlight";
 import ProfilePage from "./components/profile/ProfilePage";
 import UpdateProfilePage from "./components/profile/UpdateProfilePage";
+import ViewBookingDetails from "./components/profile/ViewBookingDetails";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/flights" element={<FindFlight />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/update/profile" element={<UpdateProfilePage />} />
+        <Route path="/profile/booking/:id" element={<ViewBookingDetails />} />
       </Routes>
       <Footer />
     </BrowserRouter>
