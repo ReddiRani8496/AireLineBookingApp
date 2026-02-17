@@ -162,9 +162,12 @@ class ApiService {
   }
 
   static async getAirportById(id) {
-    const response = await axios.get(`${BASE_URL}/airport/findById/${id}`, {
-      headers: this.getHeader(),
-    });
+    const response = await axios.get(
+      `${this.BASE_URL}/airport/findById/${id}`,
+      {
+        headers: this.getHeader(),
+      },
+    );
 
     return response.data;
   }
@@ -189,6 +192,16 @@ class ApiService {
     return response.data;
   }
 
+  static async findFlightById(id) {
+    const response = await axios.get(
+      `${this.BASE_URL}/flights/flightById/${id}`,
+      {
+        headers: this.getHeader(),
+      },
+    );
+    return response.data;
+  }
+
   // booking apis
   static async getMyBookings() {
     const response = await axios.get(`${this.BASE_URL}/booking/myBookings`, {
@@ -200,6 +213,13 @@ class ApiService {
 
   static async getBookingById(id) {
     const response = await axios.get(`${this.BASE_URL}/booking/getById/${id}`, {
+      headers: this.getHeader(),
+    });
+    return response.data;
+  }
+
+  static async createBooking(body) {
+    const response = await axios.post(`${this.BASE_URL}/booking/create`, body, {
       headers: this.getHeader(),
     });
     return response.data;
