@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useMessage } from "../common/MessageDisplay";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ApiService from "../../services/ApiService";
+import "./ViewBookingDetails.css";
 
 function ViewBookingDetails() {
   const { id } = useParams();
@@ -78,7 +79,7 @@ function ViewBookingDetails() {
                 {booking?.flight?.arrivalAirport.iataCode}
               </span>
               <span className="booking-details-date">
-                {booking.flight.departureTime}
+                {formatDate(booking.flight.departureTime)}
               </span>
             </div>
           </div>
@@ -100,7 +101,7 @@ function ViewBookingDetails() {
             <div className="booking-details-info-row">
               <span className="booking-details-label">Booking Date:</span>
               <span className="booking-details-value">
-                {booking.bookingDate}
+                {formatDate(booking.bookingDate)}
               </span>
             </div>
             <div className="booking-details-info-row">
