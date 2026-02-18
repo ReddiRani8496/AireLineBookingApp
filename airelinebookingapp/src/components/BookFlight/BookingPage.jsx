@@ -126,7 +126,186 @@ function BookingPage() {
     }
   };
 
-  return <div>BookingPage</div>;
+  if (loading) return <div>Loading...</div>;
+
+  return (
+    <div className="booking-page">
+      <div className="booking-container">
+        <ErrorDisplay />
+        <SuccessDisplay />
+
+        <h2 className="booking-title">Book Flight {flight.flightNumber}</h2>
+        <div className="flight-summary">
+          <div className="route">
+            <span className="departure">
+              {flight.departureAirport.iataCode} -{" "}
+              {flight.arrivalAirport.iataCode}
+            </span>
+            <span className="date">
+              {new Date(flight.departureTime).toLocaleDateString([], {
+                weekday: "short",
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </span>
+          </div>
+
+          <div className="times">
+            <div className="departure-time">
+              {new Date(flight.departureTime).toLocaleDateString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </div>
+            <div className="departure-time">
+              {new Date(flight.arrivalTime).toLocaleDateString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </div>
+          </div>
+          <div className="price">
+            Base Price: ${flight.basePrice.toFixed(2)}
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="booking-form">
+          <div className="passengers-section">
+            <h3>Passenger Details</h3>
+
+            {passengers.map((passenger, index) => (
+              <div key={index} className="passenger-card">
+                <div className="passenger-header">
+                  <h4>Passenger {index + 1}</h4>
+                  {passengers.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => removePassenger(index)}
+                      className="remove-passenger"
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+
+                <div className="passenger-form">
+                  <div className="form-group">
+                    <label>First Name*</label>
+                    <input
+                      type="text"
+                      value={passenger.firstName}
+                      onChange={(e) =>
+                        handlePassengerChange(
+                          index,
+                          "firstName",
+                          e.target.value,
+                        )
+                      }
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Last Name*</label>
+                    <input
+                      type="text"
+                      value={passenger.lastName}
+                      onChange={(e) =>
+                        handlePassengerChange(index, "lastName", e.target.value)
+                      }
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Passport Number*</label>
+                    <input
+                      type="text"
+                      value={passenger.passportNumber}
+                      onChange={(e) =>
+                        handlePassengerChange(
+                          index,
+                          "passportNumber",
+                          e.target.value,
+                        )
+                      }
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Passenger Type*</label>
+                    <select
+                      value={passenger.type}
+                      onChange={(e) =>
+                        handlePassengerChange(index, "type", e.target.value)
+                      }
+                    >
+                      <option>Adult (12+ years)</option>
+                      <option>Child (2-11 years)</option>
+                      <option>Infant (0-23 months)</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label>Seat Number*</label>
+                    <select
+                      value={passenger.type}
+                      onChange={(e) =>
+                        handlePassengerChange(
+                          index,
+                          "seatNumber",
+                          e.target.value,
+                        )
+                      }
+                    >
+                      <option>Select Seat</option>
+                      {availableSeats.map((seat) => (
+                        <option
+                          key={`seat-${index}-${seat}`}
+                          value={seat}
+                          disabled={passengers.passportNumber(
+                            (p) => p.seatNumber === seat,
+                          )}
+                        >
+                          {seat}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label>Special Requests</label>
+                    <input
+                      type="text"
+                      value={passenger.specialRequests}
+                      onChange={(e) =>
+                        handlePassengerChange(
+                          index,
+                          "specialRequests",
+                          e.target.value,
+                        )
+                      }
+                      placeholder="Dietary needs, assistance required etc.."
+                    />
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={addPassenger}
+                    className="add-passenger"
+                  >
+                    + Add Another Passenger
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default BookingPage;
