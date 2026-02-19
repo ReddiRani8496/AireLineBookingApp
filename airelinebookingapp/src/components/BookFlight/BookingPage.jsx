@@ -303,7 +303,6 @@ function BookingPage() {
             ))}
           </div>
         </form>
-        <div></div>
       </div>
     </div>
   );
