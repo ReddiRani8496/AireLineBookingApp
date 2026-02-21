@@ -11,6 +11,7 @@ import FindFlight from "./components/pages/FindFlight";
 import ProfilePage from "./components/profile/ProfilePage";
 import UpdateProfilePage from "./components/profile/UpdateProfilePage";
 import ViewBookingDetails from "./components/profile/ViewBookingDetails";
+import BookingPage from "./components/BookFlight/BookingPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/update/profile" element={<UpdateProfilePage />} />
         <Route path="/profile/booking/:id" element={<ViewBookingDetails />} />
+        <Route path="/book-flight/:id" element={<BookingPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

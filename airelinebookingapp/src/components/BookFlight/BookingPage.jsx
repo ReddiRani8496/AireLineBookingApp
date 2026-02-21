@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useMessage } from "../common/MessageDisplay";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import ApiService from "../../services/ApiService";
+import "./BookingPage.css";
 
 function BookingPage() {
   const { id: flightId } = useParams();
@@ -13,14 +14,16 @@ function BookingPage() {
   const [loading, setLoading] = useState(true);
 
   const [availableSeats, setAvailableSeats] = useState([]);
-  const [passengers, setPassengers] = useState({
-    firstName: "",
-    lastName: "",
-    passportNumber: "",
-    type: "ADULT",
-    seatNumber: "",
-    specialRequests: "",
-  });
+  const [passengers, setPassengers] = useState([
+    {
+      firstName: "",
+      lastName: "",
+      passportNumber: "",
+      type: "ADULT",
+      seatNumber: "",
+      specialRequests: "",
+    },
+  ]);
 
   useEffect(() => {
     if (state?.flight) {
@@ -251,7 +254,7 @@ function BookingPage() {
                   <div className="form-group">
                     <label>Seat Number*</label>
                     <select
-                      value={passenger.type}
+                      value={passenger.seatNumber}
                       onChange={(e) =>
                         handlePassengerChange(
                           index,
@@ -260,13 +263,13 @@ function BookingPage() {
                         )
                       }
                     >
-                      <option>Select Seat</option>
+                      <option value="">Select Seat</option>
                       {availableSeats.map((seat) => (
                         <option
                           key={`seat-${index}-${seat}`}
                           value={seat}
-                          disabled={passengers.passportNumber(
-                            (p) => p.seatNumber === seat,
+                          disabled={passengers.some(
+                            (p, i) => i !== index && p.seatNumber === seat,
                           )}
                         >
                           {seat}
@@ -274,7 +277,6 @@ function BookingPage() {
                       ))}
                     </select>
                   </div>
-
                   <div className="form-group">
                     <label>Special Requests</label>
                     <input
@@ -290,20 +292,51 @@ function BookingPage() {
                       placeholder="Dietary needs, assistance required etc.."
                     />
                   </div>
-
-                  <button
-                    type="button"
-                    onClick={addPassenger}
-                    className="add-passenger"
-                  >
-                    + Add Another Passenger
-                  </button>
                 </div>
               </div>
             ))}
+            <button
+              type="button"
+              onClick={addPassenger}
+              className="add-passenger"
+            >
+              + Add Another Passenger
+            </button>
+          </div>
+          <div className="summary-section">
+            <h3>Booking Summary</h3>
+            <div className="summary-details">
+              <div className="summary-row">
+                <span>Passengers:</span>
+                <span>{passengers.length}</span>
+              </div>
+              {passengers.map((passenger, index) => (
+                <div key={index} className="summary-row passenger-row">
+                  <span>
+                    Passenger {index + 1} ({passenger.type}):
+                  </span>
+                  <span>
+                    $
+                    {passenger.type == "ADULT"
+                      ? flight.basePrice.toFixed(2)
+                      : passenger.type == "CHILD"
+                        ? (flight.basePrice * 0.75).toFixed(2)
+                        : (flight.basePrice * 0.1).toFixed(2)}
+                  </span>
+                </div>
+              ))}
+
+              <div className="summary-row total">
+                <span>Total: </span>
+                <span>${calculateTotalPrice().toFixed(2)}</span>
+              </div>
+
+              <button type="submit" className="submit-booking">
+                Confirm Booking
+              </button>
+            </div>
           </div>
         </form>
-        <div></div>
       </div>
     </div>
   );
