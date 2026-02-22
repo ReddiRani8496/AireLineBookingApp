@@ -12,6 +12,7 @@ import ProfilePage from "./components/profile/ProfilePage";
 import UpdateProfilePage from "./components/profile/UpdateProfilePage";
 import ViewBookingDetails from "./components/profile/ViewBookingDetails";
 import BookingPage from "./components/BookFlight/BookingPage";
+import AdminDashboardPage from "./components/admin/AdminDashboardPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/update/profile" element={<UpdateProfilePage />} />
         <Route path="/profile/booking/:id" element={<ViewBookingDetails />} />
         <Route path="/book-flight/:id" element={<BookingPage />} />
+        <Route path="/admin" element={<AdminDashboardPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

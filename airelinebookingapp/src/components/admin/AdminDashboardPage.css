@@ -1,0 +1,118 @@
+.admin-dashboard-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-dashboard-card {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.admin-dashboard-title {
+  color: #1a237e;
+  margin-bottom: 1rem;
+}
+
+.admin-dashboard-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 1rem;
+}
+
+.admin-dashboard-tabs button {
+  border: none;
+  background: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.admin-dashboard-tabs button.active {
+  background-color: #1a237e;
+  color: white;
+  border-radius: 5px;
+}
+
+.admin-booking-card,
+.admin-flight-card {
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.admin-booking-header,
+.admin-flight-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.admin-booking-status,
+.admin-flight-status {
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+.admin-booking-status.pending,
+.admin-flight-status.scheduled {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.admin-booking-status.confirmed,
+.admin-flight-status.departed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.admin-booking-status.cancelled,
+.admin-flight-status.cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.admin-booking-status.checked_in,
+.admin-flight-status.arrived {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.admin-booking-status.delayed,
+.admin-flight-status.delayed {
+  background-color: #ffe8cc;
+  color: #804d00;
+}
+
+.admin-booking-details,
+.admin-flight-details {
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.admin-view-details,
+.admin-manage-flight {
+  color: #1a237e;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid #1a237e;
+  border-radius: 5px;
+}
+
+.admin-view-details:hover,
+.admin-manage-flight:hover {
+  background-color: #1a237e;
+  color: white;
+}

@@ -224,6 +224,20 @@ class ApiService {
     });
     return response.data;
   }
+
+  static async getAllFlights() {
+    const response = await axios.get(`${this.BASE_URL}/flights/allFlights`, {
+      headers: this.getHeader(),
+    });
+    return response.data;
+  }
+
+  static async getAllBookings() {
+    const response = await axios.get(`${this.BASE_URL}/booking/allBookings`, {
+      headers: this.getHeader(),
+    });
+    return response.data;
+  }
 }
 
 export default ApiService;

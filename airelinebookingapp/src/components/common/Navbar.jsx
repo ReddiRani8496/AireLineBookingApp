@@ -46,7 +46,11 @@ function Navbar() {
                   Pilot
                 </Link>
               )}
-              {isAdmin && <Link to="/admin">Admin</Link>}
+              {isAdmin && (
+                <Link to="/admin" className="nav-link">
+                  Admin
+                </Link>
+              )}
               <button className="nav-button">Logout</button>
             </>
           ) : (
