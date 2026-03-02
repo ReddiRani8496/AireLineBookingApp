@@ -33,6 +33,8 @@ function Login() {
       const response = await ApiService.loginUser(loginData);
       console.log("response ", response);
       if (response.statusCode == 200) {
+        ApiService.saveToken(response.data.token);
+        ApiService.saveRoles(response.data.roles);
         navigate("/");
         showSuccess("Login successfull");
       } else {

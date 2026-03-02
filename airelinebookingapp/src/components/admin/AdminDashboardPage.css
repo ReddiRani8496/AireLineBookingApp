@@ -116,3 +116,78 @@
   background-color: #1a237e;
   color: white;
 }
+
+.admin-airports-list {
+  margin-top: 1.5rem;
+}
+
+.airports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.admin-airport-card {
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: box-shadow 0.2s;
+}
+
+.admin-airport-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.airport-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #e9ecef;
+
+  h4 {
+    margin: 0;
+    color: #1a237e;
+  }
+}
+
+.iata-code {
+  background-color: #1a237e;
+  color: white;
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.airport-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.details-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail-lable {
+  font-weight: 600;
+}
+
+.airport-actions {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: flex-end;
+}
+
+.edit-button {
+  background-color: #1a237e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 15px;
+}

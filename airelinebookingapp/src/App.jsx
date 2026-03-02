@@ -13,6 +13,7 @@ import UpdateProfilePage from "./components/profile/UpdateProfilePage";
 import ViewBookingDetails from "./components/profile/ViewBookingDetails";
 import BookingPage from "./components/BookFlight/BookingPage";
 import AdminDashboardPage from "./components/admin/AdminDashboardPage";
+import AdminBookingDetailsPage from "./components/admin/AdminBookingDetailsPage";
 
 function App() {
   return (
@@ -28,6 +29,10 @@ function App() {
         <Route path="/profile/booking/:id" element={<ViewBookingDetails />} />
         <Route path="/book-flight/:id" element={<BookingPage />} />
         <Route path="/admin" element={<AdminDashboardPage />} />
+        <Route
+          path="/admin/booking/:id"
+          element={<AdminBookingDetailsPage />}
+        />
       </Routes>
       <Footer />
     </BrowserRouter>

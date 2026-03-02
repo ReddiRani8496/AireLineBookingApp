@@ -207,11 +207,11 @@ function AdminDashboardPage() {
                       </div>
 
                       <div className="airport-details">
-                        <div>
+                        <div className="details-row">
                           <span className="detail-lable">City:</span>
                           <span>{airport.city}</span>
                         </div>
-                        <div>
+                        <div className="details-row">
                           <span className="detail-lable">Country:</span>
                           <span>{airport.country}</span>
                         </div>

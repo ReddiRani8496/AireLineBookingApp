@@ -238,6 +238,17 @@ class ApiService {
     });
     return response.data;
   }
+
+  static async updateBookingStatus(id, body) {
+    const response = await axios.put(
+      `${this.BASE_URL}/updateBooking/${id}`,
+      body,
+      {
+        headers: this.getHeader(),
+      },
+    );
+    return response.data;
+  }
 }
 
 export default ApiService;
