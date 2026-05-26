@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useMessage } from "../common/MessageDisplay";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ApiService from "../../services/ApiService";
 import "./AdminBookingDetailsPage.css";
 
@@ -36,7 +36,7 @@ function AdminBookingDetailsPage() {
         fetchBookingDetails();
       }
     } catch (error) {
-      showError("Failed to update booking status");
+      showError("Failed to update booking status", error);
     }
   };
 

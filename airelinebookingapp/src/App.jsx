@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/common/Navbar";
@@ -14,6 +12,8 @@ import ViewBookingDetails from "./components/profile/ViewBookingDetails";
 import BookingPage from "./components/BookFlight/BookingPage";
 import AdminDashboardPage from "./components/admin/AdminDashboardPage";
 import AdminBookingDetailsPage from "./components/admin/AdminBookingDetailsPage";
+import AddEditAirportPage from "./components/admin/AddEditAirportPage";
+import AddFlightPage from "./components/admin/AddFlightPage";
 
 function App() {
   return (
@@ -29,6 +29,9 @@ function App() {
         <Route path="/profile/booking/:id" element={<ViewBookingDetails />} />
         <Route path="/book-flight/:id" element={<BookingPage />} />
         <Route path="/admin" element={<AdminDashboardPage />} />
+        <Route path="/add-airport" element={<AddEditAirportPage />} />
+        <Route path="/edit-airport/:id" element={<AddEditAirportPage />} />
+        <Route path="/add-flight" element={<AddFlightPage />} />
         <Route
           path="/admin/booking/:id"
           element={<AdminBookingDetailsPage />}

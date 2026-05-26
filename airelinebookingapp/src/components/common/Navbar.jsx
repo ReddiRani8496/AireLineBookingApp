@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ApiService from "../../services/ApiService";
 import "./Navbar.css";
 
@@ -13,7 +13,15 @@ function Navbar() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  const navigate = useNavigate();
 
+  const handleLogout = () => {
+    const isLogout = window.confirm("Are you sure you want to logout? ");
+    if (isLogout) {
+      ApiService.logout();
+      navigate("/login");
+    }
+  };
   return (
     <div className="navbar">
       <div className="navbar-container">
@@ -51,7 +59,9 @@ function Navbar() {
                   Admin
                 </Link>
               )}
-              <button className="nav-button">Logout</button>
+              <button className="nav-button" onClick={handleLogout}>
+                Logout
+              </button>
             </>
           ) : (
             <>
