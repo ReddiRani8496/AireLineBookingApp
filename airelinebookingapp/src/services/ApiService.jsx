@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 
 class ApiService {
-  static BASE_URL = "http://localhost:8080/api";
+  static BASE_URL = import.meta.env.VITE_API_URL;
   static axiosInstance = axios.create();
 
   static {
