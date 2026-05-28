@@ -3,21 +3,6 @@ import axios from "axios";
 
 class ApiService {
   static BASE_URL = import.meta.env.VITE_API_URL;
-  static axiosInstance = axios.create();
-
-  static {
-    this.axiosInstance.interceptors.response.use(
-      (response) => response,
-      (error) => {
-        if (error.response?.status === 401 || error.response?.status == 403) {
-          this.logout();
-          window.location.href = "/login";
-          return Promise.reject(error);
-        }
-        return Promise.reject(error);
-      },
-    );
-  }
 
   static saveToken(token) {
     localStorage.setItem("token", token);
@@ -83,19 +68,13 @@ class ApiService {
   static async registerUser(body) {
     console.log("inside register user ", body);
     console.log("url", `${this.BASE_URL}/auth/register`);
-    const response = await this.axiosInstance.post(
-      `${this.BASE_URL}/auth/register`,
-      body,
-    );
+    const response = await axios.post(`${this.BASE_URL}/auth/register`, body);
     console.log("line 71");
     return response.data;
   }
 
   static async loginUser(body) {
-    const response = await this.axiosInstance.post(
-      `${this.BASE_URL}/auth/login`,
-      body,
-    );
+    const response = await axios.post(`${this.BASE_URL}/auth/login`, body);
     return response.data;
   }
 
@@ -104,7 +83,7 @@ class ApiService {
   static async getMyAccountDetails() {
     console.log("line 844444444", `${this.BASE_URL}/users/myAccountDetails`);
     console.log(this.getHeader());
-    const response = await this.axiosInstance.get(
+    const response = await axios.get(
       `${this.BASE_URL}/users/myAccountDetails`,
       {
         headers: this.getHeader(),
@@ -116,7 +95,7 @@ class ApiService {
 
   static async updateMyAccount(body) {
     console.log("inside update my acccount api");
-    const response = await this.axiosInstance.put(
+    const response = await axios.put(
       `${this.BASE_URL}/users/updateMyAccount`,
       body,
       {
@@ -127,40 +106,34 @@ class ApiService {
   }
 
   static async allPilots() {
-    const response = await this.axiosInstance.get(
-      `${this.BASE_URL}/users/allPilots`,
-      {
-        headers: this.getHeader(),
-      },
-    );
+    const response = await axios.get(`${this.BASE_URL}/users/allPilots`, {
+      headers: this.getHeader(),
+    });
     return response.data;
   }
 
   // Role
 
   static async addRole(body) {
-    await this.axiosInstance.post(`${this.BASE_URL}/role/add`, body, {
+    await axios.post(`${this.BASE_URL}/role/add`, body, {
       headers: this.getHeader(),
     });
   }
 
   static async updateRole(body) {
-    await this.axiosInstance.put(`${this.BASE_URL}/role/update`, body, {
+    await axios.put(`${this.BASE_URL}/role/update`, body, {
       headers: this.getHeader(),
     });
   }
 
   static async deleteRole(roleName) {
-    await this.axiosInstance.delete(
-      `${this.BASE_URL}/role/delete/${roleName}`,
-      {
-        headers: this.getHeader(),
-      },
-    );
+    await axios.delete(`${this.BASE_URL}/role/delete/${roleName}`, {
+      headers: this.getHeader(),
+    });
   }
 
   static async allRoles() {
-    await this.axiosInstance.get(`${this.BASE_URL}/role/allRoles`, {
+    await axios.get(`${this.BASE_URL}/role/allRoles`, {
       headers: this.getHeader(),
     });
   }
@@ -168,39 +141,28 @@ class ApiService {
   // Airport Controller
 
   static async createAirport(body) {
-    const response = await this.axiosInstance.post(
-      `${this.BASE_URL}/airport/create`,
-      body,
-      {
-        headers: this.getHeader(),
-      },
-    );
+    const response = await axios.post(`${this.BASE_URL}/airport/create`, body, {
+      headers: this.getHeader(),
+    });
     return response.data;
   }
 
   static async updateAirport(body) {
-    const response = await this.axiosInstance.put(
-      `${this.BASE_URL}/airport/update`,
-      body,
-      {
-        headers: this.getHeader(),
-      },
-    );
+    const response = await axios.put(`${this.BASE_URL}/airport/update`, body, {
+      headers: this.getHeader(),
+    });
     return response.data;
   }
 
   static async getAllAirports() {
-    const response = await this.axiosInstance.get(
-      `${this.BASE_URL}/airport/allAirports`,
-      {
-        headers: this.getHeader(),
-      },
-    );
+    const response = await axios.get(`${this.BASE_URL}/airport/allAirports`, {
+      headers: this.getHeader(),
+    });
     return response.data;
   }
 
   static async getAirportById(id) {
-    const response = await this.axiosInstance.get(
+    const response = await axios.get(
       `${this.BASE_URL}/airport/findById/${id}`,
       {
         headers: this.getHeader(),
@@ -222,19 +184,16 @@ class ApiService {
       departureDate: departureDate,
     };
 
-    const response = await this.axiosInstance.get(
-      `${this.BASE_URL}/flights/searchFlight`,
-      {
-        params: params,
-        headers: this.getHeader(),
-      },
-    );
+    const response = await axios.get(`${this.BASE_URL}/flights/searchFlight`, {
+      params: params,
+      headers: this.getHeader(),
+    });
 
     return response.data;
   }
 
   static async findFlightById(id) {
-    const response = await this.axiosInstance.get(
+    const response = await axios.get(
       `${this.BASE_URL}/flights/flightById/${id}`,
       {
         headers: this.getHeader(),
@@ -245,59 +204,43 @@ class ApiService {
 
   // booking apis
   static async getMyBookings() {
-    const response = await this.axiosInstance.get(
-      `${this.BASE_URL}/booking/myBookings`,
-      {
-        headers: this.getHeader(),
-      },
-    );
+    const response = await axios.get(`${this.BASE_URL}/booking/myBookings`, {
+      headers: this.getHeader(),
+    });
 
     return response.data;
   }
 
   static async getBookingById(id) {
-    const response = await this.axiosInstance.get(
-      `${this.BASE_URL}/booking/getById/${id}`,
-      {
-        headers: this.getHeader(),
-      },
-    );
+    const response = await axios.get(`${this.BASE_URL}/booking/getById/${id}`, {
+      headers: this.getHeader(),
+    });
     return response.data;
   }
 
   static async createBooking(body) {
-    const response = await this.axiosInstance.post(
-      `${this.BASE_URL}/booking/create`,
-      body,
-      {
-        headers: this.getHeader(),
-      },
-    );
+    const response = await axios.post(`${this.BASE_URL}/booking/create`, body, {
+      headers: this.getHeader(),
+    });
     return response.data;
   }
 
   static async getAllFlights() {
-    const response = await this.axiosInstance.get(
-      `${this.BASE_URL}/flights/allFlights`,
-      {
-        headers: this.getHeader(),
-      },
-    );
+    const response = await axios.get(`${this.BASE_URL}/flights/allFlights`, {
+      headers: this.getHeader(),
+    });
     return response.data;
   }
 
   static async getAllBookings() {
-    const response = await this.axiosInstance.get(
-      `${this.BASE_URL}/booking/allBookings`,
-      {
-        headers: this.getHeader(),
-      },
-    );
+    const response = await axios.get(`${this.BASE_URL}/booking/allBookings`, {
+      headers: this.getHeader(),
+    });
     return response.data;
   }
 
   static async updateBookingStatus(id, body) {
-    const response = await this.axiosInstance.put(
+    const response = await axios.put(
       `${this.BASE_URL}/updateBooking/${id}`,
       body,
       {
@@ -308,16 +251,12 @@ class ApiService {
   }
 
   static async getAllCities() {
-    const resp = await this.axiosInstance.get(
-      `${this.BASE_URL}/flights/allCities`,
-    );
+    const resp = await axios.get(`${this.BASE_URL}/flights/allCities`);
     return resp.data;
   }
 
   static async getAllCountries() {
-    const resp = await this.axiosInstance.get(
-      `${this.BASE_URL}/flights/allCountries`,
-    );
+    const resp = await axios.get(`${this.BASE_URL}/flights/allCountries`);
     return resp.data;
   }
 }
