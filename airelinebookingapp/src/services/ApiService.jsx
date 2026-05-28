@@ -81,8 +81,6 @@ class ApiService {
   // user details
 
   static async getMyAccountDetails() {
-    console.log("line 844444444", `${this.BASE_URL}/users/myAccountDetails`);
-    console.log(this.getHeader());
     const response = await axios.get(
       `${this.BASE_URL}/users/myAccountDetails`,
       {
@@ -94,7 +92,6 @@ class ApiService {
   }
 
   static async updateMyAccount(body) {
-    console.log("inside update my acccount api");
     const response = await axios.put(
       `${this.BASE_URL}/users/updateMyAccount`,
       body,
@@ -251,12 +248,16 @@ class ApiService {
   }
 
   static async getAllCities() {
-    const resp = await axios.get(`${this.BASE_URL}/flights/allCities`);
+    const resp = await axios.get(`${this.BASE_URL}/flights/allCities`, {
+      headers: this.getHeader(),
+    });
     return resp.data;
   }
 
   static async getAllCountries() {
-    const resp = await axios.get(`${this.BASE_URL}/flights/allCountries`);
+    const resp = await axios.get(`${this.BASE_URL}/flights/allCountries`, {
+      headers: this.getHeader(),
+    });
     return resp.data;
   }
 }
