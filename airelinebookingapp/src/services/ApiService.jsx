@@ -4,6 +4,33 @@ import axios from "axios";
 class ApiService {
   static BASE_URL = import.meta.env.VITE_API_URL;
 
+  // Health check to verify backend is accessible
+  static async checkBackendHealth() {
+    // Try to reach the backend using a simple GET request with timeout
+    // We'll try a simple endpoint that should always be accessible
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout
+
+    try {
+      const response = await axios.get(`${this.BASE_URL}/airport/allAirports`, {
+        headers: this.getHeader(),
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+      return true;
+    } catch (axiosError) {
+      clearTimeout(timeoutId);
+
+      // If we get any response from the server (even error), server is up
+      if (axiosError.response) {
+        return true;
+      }
+
+      // Network errors mean backend is not accessible
+      throw new Error("Backend server is not accessible");
+    }
+  }
+
   static saveToken(token) {
     localStorage.setItem("token", token);
   }
@@ -66,10 +93,7 @@ class ApiService {
   // REGISTER AND LOGIN USER
 
   static async registerUser(body) {
-    console.log("inside register user ", body);
-    console.log("url", `${this.BASE_URL}/auth/register`);
     const response = await axios.post(`${this.BASE_URL}/auth/register`, body);
-    console.log("line 71");
     return response.data;
   }
 

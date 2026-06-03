@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useMessage } from "../common/MessageDisplay";
 import { Link, useNavigate } from "react-router-dom";
 import ApiService from "../../services/ApiService";
+import { useNotification } from "../../hooks/useNotification";
 import "./Registration.css";
 
 function Registration() {
   const { ErrorDisplay, SuccessDisplay, showError, showSuccess } = useMessage();
+  const { notifySuccess, notifyError } = useNotification();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -31,13 +33,16 @@ function Registration() {
       !formData.phoneNumber
     ) {
       console.log("line 33");
+      notifyError("All fields are required");
       showError("All fields are required");
       return;
     }
 
     if (formData.password != formData.confirmPassword) {
       console.log("line 39");
+      notifyError("Passwords do not match");
       showError("Password do not match");
+      return;
     }
 
     const registrationData = {
@@ -51,13 +56,18 @@ function Registration() {
       const response = await ApiService.registerUser(registrationData);
       console.log("response ", response);
       if (response.statusCode == 200) {
-        navigate("/login");
+        notifySuccess("Registration successful! Redirecting to login...");
         showSuccess("Registered successfully");
+        setTimeout(() => {
+          navigate("/login");
+        }, 1500);
       } else {
+        notifyError("Registration failed. Please try again.");
         showError("Registration is not successfull");
       }
     } catch (error) {
       console.log("inside catch", error);
+      notifyError("Registration failed. Please try again.");
       showError("Registration is not successfull");
     }
   };

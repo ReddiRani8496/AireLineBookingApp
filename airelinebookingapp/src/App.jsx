@@ -14,31 +14,34 @@ import AdminDashboardPage from "./components/admin/AdminDashboardPage";
 import AdminBookingDetailsPage from "./components/admin/AdminBookingDetailsPage";
 import AddEditAirportPage from "./components/admin/AddEditAirportPage";
 import AddFlightPage from "./components/admin/AddFlightPage";
+import AppInitializer from "./components/common/AppInitializer";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/register" element={<Registration />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/flights" element={<FindFlight />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/update/profile" element={<UpdateProfilePage />} />
-        <Route path="/profile/booking/:id" element={<ViewBookingDetails />} />
-        <Route path="/book-flight/:id" element={<BookingPage />} />
-        <Route path="/admin" element={<AdminDashboardPage />} />
-        <Route path="/add-airport" element={<AddEditAirportPage />} />
-        <Route path="/edit-airport/:id" element={<AddEditAirportPage />} />
-        <Route path="/add-flight" element={<AddFlightPage />} />
-        <Route
-          path="/admin/booking/:id"
-          element={<AdminBookingDetailsPage />}
-        />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <AppInitializer>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/register" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/flights" element={<FindFlight />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/update/profile" element={<UpdateProfilePage />} />
+          <Route path="/profile/booking/:id" element={<ViewBookingDetails />} />
+          <Route path="/book-flight/:id" element={<BookingPage />} />
+          <Route path="/admin" element={<AdminDashboardPage />} />
+          <Route path="/add-airport" element={<AddEditAirportPage />} />
+          <Route path="/edit-airport/:id" element={<AddEditAirportPage />} />
+          <Route path="/add-flight" element={<AddFlightPage />} />
+          <Route
+            path="/admin/booking/:id"
+            element={<AdminBookingDetailsPage />}
+          />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </AppInitializer>
   );
 }
 
